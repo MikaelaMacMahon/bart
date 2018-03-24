@@ -18,17 +18,17 @@ EpochesReshape_2 = reshape(Epoches_2,size(EEG2,1),[]);
 % covariance
 % each column of matrix should be a channel 
 % left class
-SigmaL = cov(EpochesReshape_1');
+Sigma1 = cov(EpochesReshape_1');
 
 % right class
-SigmaR = cov(EpochesReshape_2');
+Sigma2 = cov(EpochesReshape_2');
 
 % solving the generalized eigenvalue problem
 % Note here SigmaL is the first input argumen. Here for simplicity, we take 
 % the first column of W as the corresponding component for Left hand movement;
 % and the last column of W is the corresponding component for right hand movement
 
-[W,~] = eig(SigmaL, SigmaL + SigmaR);
+[W,~] = eig(Sigma1, Sigma1 + Sigma2);
 
 % left class after CSP
 for epochID = 1:length(EpochStartTime_1)
